@@ -908,7 +908,7 @@
     <div class="hero-btns">
       <a href="#projects" class="btn-grad">🚀 View Projects</a>
       <a href="#contact"  class="btn-ghost">💬 Let's Talk</a>
-      <a href="resume.pdf" download class="btn-ghost" style="font-size:.82rem;padding:.55rem 1.2rem">📄 Resume</a>
+      <a href="Anurag_Barkhade_CV.pdf" download class="btn-ghost" style="font-size:.82rem;padding:.55rem 1.2rem">📄 Resume</a>
     </div>
   </div>
 
@@ -1494,26 +1494,29 @@
         </div>
       </div>
 
-      <form onsubmit="onSend(event)">
+      <form onsubmit="onSend(event)" id="contact-form">
+        <input type="hidden" name="_subject" value="New message from portfolio — anuragab1660.github.io" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
         <div class="form-row2">
           <div class="fg">
             <label class="fl">Your Name</label>
-            <input type="text" class="fi" placeholder="Jane Doe" required />
+            <input type="text" name="name" class="fi" placeholder="Jane Doe" required />
           </div>
           <div class="fg">
             <label class="fl">Email Address</label>
-            <input type="email" class="fi" placeholder="jane@example.com" required />
+            <input type="email" name="email" class="fi" placeholder="jane@example.com" required />
           </div>
         </div>
         <div class="fg">
           <label class="fl">Subject</label>
-          <input type="text" class="fi" placeholder="Project Collaboration / Job Opportunity" />
+          <input type="text" name="subject" class="fi" placeholder="Project Collaboration / Job Opportunity" />
         </div>
         <div class="fg">
           <label class="fl">Message</label>
-          <textarea class="fi" placeholder="Hi Anurag, I'd love to discuss…"></textarea>
+          <textarea name="message" class="fi" placeholder="Hi Anurag, I'd love to discuss…"></textarea>
         </div>
-        <button type="submit" class="f-submit"><span>🚀</span> Send Message</button>
+        <button type="submit" class="f-submit" id="f-submit-btn"><span>🚀</span> Send Message</button>
       </form>
     </div>
 
@@ -1785,16 +1788,48 @@ window.addEventListener('scroll',()=>{
 });
 
 /* ── FORM SUBMIT ── */
-function onSend(e){
+async function onSend(e){
   e.preventDefault();
-  const btn=e.target.querySelector('.f-submit');
-  btn.innerHTML='<span>✅</span> Sent successfully!';
-  btn.style.background='linear-gradient(135deg,#10b981,#0891b2)';
-  setTimeout(()=>{
-    btn.innerHTML='<span>🚀</span> Send Message';
-    btn.style.background='';
-    e.target.reset();
-  },3000);
+  const form = e.target;
+  const btn  = document.getElementById('f-submit-btn');
+
+  // Sending state
+  btn.innerHTML = '<span>⏳</span> Sending…';
+  btn.disabled  = true;
+  btn.style.opacity = '.75';
+
+  try {
+    const data = new FormData(form);
+    const res  = await fetch('https://formsubmit.co/ajax/anuragab1660@gmail.com', {
+      method:  'POST',
+      headers: { 'Accept': 'application/json' },
+      body:    data
+    });
+    const json = await res.json();
+
+    if (json.success === 'true' || json.success === true) {
+      btn.innerHTML = '<span>✅</span> Message sent!';
+      btn.style.background  = 'linear-gradient(135deg,#10b981,#0891b2)';
+      btn.style.opacity = '1';
+      form.reset();
+      setTimeout(()=>{
+        btn.innerHTML = '<span>🚀</span> Send Message';
+        btn.style.background = '';
+        btn.disabled = false;
+      }, 4000);
+    } else {
+      throw new Error('Failed');
+    }
+  } catch(_) {
+    btn.innerHTML = '<span>❌</span> Failed — try emailing directly';
+    btn.style.background  = 'linear-gradient(135deg,#dc2626,#9f1239)';
+    btn.style.opacity = '1';
+    btn.disabled = false;
+    setTimeout(()=>{
+      btn.innerHTML = '<span>🚀</span> Send Message';
+      btn.style.background = '';
+    }, 4000);
+  }
 }
 
 /* ── SMOOTH ANCHOR ── */
