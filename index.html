@@ -297,7 +297,12 @@
       width:190px;height:190px;border-radius:28px;
       background:linear-gradient(135deg,#2563eb,#6366f1,#06b6d4);
       display:flex;align-items:center;justify-content:center;font-size:4.5rem;
-      box-shadow:0 0 50px rgba(99,102,241,.3);position:relative;z-index:1;
+      box-shadow:0 8px 40px rgba(99,102,241,.25);position:relative;z-index:1;
+      overflow:hidden;
+    }
+    .avatar img {
+      width:100%;height:100%;object-fit:cover;object-position:center top;
+      border-radius:28px;display:block;
     }
     .avatar-ring {
       position:absolute;inset:-10px;border-radius:38px;
@@ -550,7 +555,9 @@
     .chat-av {
       width:44px;height:44px;border-radius:50%;
       background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:1.1rem;
+      overflow:hidden;flex-shrink:0;
     }
+    .chat-av img { width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:50%; }
     .chat-name { font-weight:600;font-size:.95rem;color:#0f172a; }
     .chat-status { font-size:.75rem;color:var(--green);display:flex;align-items:center;gap:.3rem; }
     .chat-status::before {
@@ -1014,7 +1021,7 @@
     <!-- LEFT -->
     <div class="rvl" style="display:flex;flex-direction:column;gap:1.4rem">
       <div class="avatar-wrap">
-        <div class="avatar">👨‍💻</div>
+        <div class="avatar"><img src="anurag.jpg" alt="Anurag Barkhade" loading="lazy" /></div>
         <div class="avatar-ring"></div>
       </div>
 
@@ -1516,7 +1523,7 @@
   <div class="contact-inner rv">
     <div class="chat-box">
       <div class="chat-hdr">
-        <div class="chat-av">👨‍💻</div>
+        <div class="chat-av"><img src="anurag.jpg" alt="Anurag" /></div>
         <div>
           <div class="chat-name">Anurag Barkhade</div>
           <div class="chat-status">🟢 Open to Work · Responds within 24h</div>
