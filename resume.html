@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Anurag Barkhade — Resume</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    :root {
+      --purple: #6d28d9;
+      --text:   #1a1a2e;
+      --sub:    #4a4a6a;
+      --light:  #f5f3ff;
+      --border: #e5e0f5;
+      --accent: #7c3aed;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #fff;
+      color: var(--text);
+      font-size: 13px;
+      line-height: 1.6;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 2.4rem 2.8rem;
+    }
+
+    /* ── HEADER ── */
+    .hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      border-bottom: 2px solid var(--accent);
+      padding-bottom: 1.1rem;
+      margin-bottom: 1.4rem;
+    }
+    .hdr-left h1 {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: var(--text);
+      letter-spacing: -.02em;
+    }
+    .hdr-left .role {
+      font-size: .88rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: .2rem;
+    }
+    .hdr-left .tagline {
+      font-size: .78rem;
+      color: var(--sub);
+      margin-top: .3rem;
+      font-style: italic;
+    }
+    .hdr-right {
+      text-align: right;
+      font-size: .75rem;
+      color: var(--sub);
+      line-height: 1.9;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .hdr-right a { color: var(--accent); text-decoration: none; }
+
+    /* ── SECTIONS ── */
+    .sec { margin-bottom: 1.35rem; }
+    .sec-title {
+      font-size: .68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: var(--accent);
+      font-family: 'JetBrains Mono', monospace;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .3rem;
+      margin-bottom: .85rem;
+    }
+
+    /* ── TWO COL ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.6rem; }
+
+    /* ── EXPERIENCE / PROJECT ITEMS ── */
+    .item { margin-bottom: .95rem; }
+    .item-hdr { display: flex; justify-content: space-between; align-items: baseline; }
+    .item-title { font-weight: 600; font-size: .88rem; color: var(--text); }
+    .item-date {
+      font-size: .72rem;
+      color: var(--sub);
+      font-family: 'JetBrains Mono', monospace;
+      white-space: nowrap;
+    }
+    .item-sub { font-size: .78rem; color: var(--accent); font-weight: 500; margin-top: .1rem; }
+    .item-desc { font-size: .78rem; color: var(--sub); margin-top: .25rem; }
+    .item ul { margin-top: .3rem; padding-left: 1.1rem; }
+    .item li { font-size: .78rem; color: var(--sub); margin-bottom: .15rem; }
+
+    /* ── SKILLS ── */
+    .skill-group { margin-bottom: .7rem; }
+    .skill-label { font-size: .75rem; font-weight: 600; color: var(--text); margin-bottom: .3rem; }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: .3rem; }
+    .stag {
+      background: var(--light);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: .15rem .55rem;
+      font-size: .7rem;
+      color: var(--sub);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .stag.primary { background: #ede9fe; border-color: #c4b5fd; color: var(--accent); }
+
+    /* ── ACHIEVEMENTS ── */
+    .ach-item { display: flex; gap: .7rem; margin-bottom: .6rem; align-items: flex-start; }
+    .ach-icon { font-size: 1rem; flex-shrink: 0; margin-top: .05rem; }
+    .ach-text .t { font-size: .82rem; font-weight: 600; color: var(--text); }
+    .ach-text .d { font-size: .75rem; color: var(--sub); }
+
+    /* ── SUMMARY ── */
+    .summary {
+      background: var(--light);
+      border-left: 3px solid var(--accent);
+      padding: .7rem 1rem;
+      border-radius: 0 6px 6px 0;
+      font-size: .82rem;
+      color: var(--sub);
+      margin-bottom: 1.35rem;
+      line-height: 1.7;
+    }
+    .summary strong { color: var(--text); }
+
+    /* ── DOWNLOAD BTN (screen only) ── */
+    .dl-bar {
+      background: #6d28d9;
+      color: #fff;
+      text-align: center;
+      padding: .7rem;
+      font-size: .82rem;
+      font-family: 'Inter', sans-serif;
+      cursor: pointer;
+      letter-spacing: .03em;
+    }
+    .dl-bar:hover { background: #5b21b6; }
+
+    /* ── PRINT ── */
+    @media print {
+      .dl-bar { display: none; }
+      body { font-size: 12px; }
+      .page { padding: 1.4rem 1.8rem; max-width: 100%; }
+    }
+    @media (max-width: 600px) {
+      .two-col { grid-template-columns: 1fr; }
+      .hdr { flex-direction: column; gap: .8rem; }
+      .hdr-right { text-align: left; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="dl-bar" onclick="window.print()">
+  🖨️ Print / Save as PDF &nbsp;·&nbsp; <strong>Ctrl+P</strong> → Save as PDF
+</div>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="hdr">
+    <div class="hdr-left">
+      <h1>Anurag Barkhade</h1>
+      <div class="role">Flutter &amp; Android Developer · On-Device AI</div>
+      <div class="tagline">2× National Award Winner · Available for opportunities</div>
+    </div>
+    <div class="hdr-right">
+      📍 Ahmedabad, India<br>
+      🐙 <a href="https://github.com/anuragab1660">github.com/anuragab1660</a><br>
+      💼 <a href="https://linkedin.com/in/anuragbarkhade">linkedin.com/in/anuragbarkhade</a><br>
+      🌐 <a href="https://anuragab1660.github.io">anuragab1660.github.io</a>
+    </div>
+  </div>
+
+  <!-- SUMMARY -->
+  <div class="summary">
+    Mobile Application Developer specialising in <strong>Flutter, Android (Java/Kotlin)</strong> and
+    <strong>on-device ML with TensorFlow Lite</strong>. Built AI-powered crop disease detection achieving
+    <strong>94%+ accuracy fully offline</strong>, and an accessibility app that earned a
+    <strong>national MSBTE award</strong>. Currently interning as Flutter Developer at Xceptive Solution,
+    shipping production-grade cross-platform apps with MVVM architecture and Firebase.
+  </div>
+
+  <!-- EXPERIENCE + EDUCATION -->
+  <div class="two-col">
+
+    <div>
+      <div class="sec">
+        <div class="sec-title">Experience</div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">Flutter Developer Intern</div>
+            <div class="item-date">Jan 2026 – Present</div>
+          </div>
+          <div class="item-sub">Xceptive Solution · Ahmedabad</div>
+          <ul>
+            <li>Building Smart Budget — production Flutter app</li>
+            <li>MVVM + Provider state management</li>
+            <li>REST API integration with error handling</li>
+            <li>Responsive UI across iOS &amp; Android</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">Android Developer Intern</div>
+            <div class="item-date">Dec 2024 – Feb 2025</div>
+          </div>
+          <div class="item-sub">HB Industries · Ahmedabad</div>
+          <ul>
+            <li>Android features in Java &amp; Kotlin</li>
+            <li>Firebase real-time database integration</li>
+            <li>Performance profiling — reduced load time</li>
+            <li>Unit tests with JUnit</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="sec">
+        <div class="sec-title">Education</div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">B.E. Computer Engineering</div>
+            <div class="item-date">2023 – Present</div>
+          </div>
+          <div class="item-desc">Currently pursuing · Ahmedabad</div>
+        </div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">Diploma in Computer Engineering</div>
+            <div class="item-date">2020 – 2023</div>
+          </div>
+          <div class="item-desc">MSBTE Best Project Award Winner</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sec">
+        <div class="sec-title">Projects</div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">🌿 Agreeniti</div>
+          </div>
+          <div class="item-sub">Flutter · TensorFlow Lite · Computer Vision</div>
+          <ul>
+            <li>On-device crop disease detection — fully offline</li>
+            <li>94%+ accuracy with INT8 quantized TFLite model</li>
+            <li>Point-and-detect in under 1 second</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">♿ Leading Edge</div>
+          </div>
+          <div class="item-sub">Android · Java · Voice UI · Accessibility</div>
+          <ul>
+            <li>MSBTE National Award Winner</li>
+            <li>Full voice-command navigation — no reading required</li>
+            <li>WCAG-compliant UI for visually impaired users</li>
+          </ul>
+        </div>
+
+        <div class="item">
+          <div class="item-hdr">
+            <div class="item-title">💰 Smart Budget</div>
+          </div>
+          <div class="item-sub">Flutter · Firebase · REST API · MVVM</div>
+          <ul>
+            <li>True cross-platform — zero platform-specific code</li>
+            <li>Real-time Firebase sync across devices</li>
+            <li>Production MVVM architecture</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SKILLS -->
+  <div class="sec">
+    <div class="sec-title">Skills</div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:.8rem">
+      <div class="skill-group">
+        <div class="skill-label">Languages</div>
+        <div class="skill-tags">
+          <span class="stag primary">Dart</span>
+          <span class="stag primary">Kotlin</span>
+          <span class="stag">Java</span>
+          <span class="stag">SQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Frameworks</div>
+        <div class="skill-tags">
+          <span class="stag primary">Flutter</span>
+          <span class="stag primary">Android SDK</span>
+          <span class="stag">Jetpack Compose</span>
+          <span class="stag">Firebase</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-label">Concepts &amp; Tools</div>
+        <div class="skill-tags">
+          <span class="stag primary">TensorFlow Lite</span>
+          <span class="stag">MVVM</span>
+          <span class="stag">REST APIs</span>
+          <span class="stag">Git</span>
+          <span class="stag">Provider</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACHIEVEMENTS -->
+  <div class="sec">
+    <div class="sec-title">Achievements</div>
+    <div>
+      <div class="ach-item">
+        <div class="ach-icon">🏆</div>
+        <div class="ach-text">
+          <div class="t">MSBTE Best Diploma Project Award</div>
+          <div class="d">Maharashtra State Board of Technical Education — Leading Edge accessibility app recognised for social impact</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">🥉</div>
+        <div class="ach-text">
+          <div class="t">3rd Prize — MindSpark National Technical Symposium</div>
+          <div class="d">Top 3 nationally in mobile application development category</div>
+        </div>
+      </div>
+      <div class="ach-item">
+        <div class="ach-icon">🧠</div>
+        <div class="ach-text">
+          <div class="t">94%+ On-Device ML Accuracy</div>
+          <div class="d">TFLite INT8 quantized model — fully offline on low-end Android devices</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
